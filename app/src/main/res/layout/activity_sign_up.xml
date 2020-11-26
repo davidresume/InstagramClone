@@ -128,4 +128,43 @@
         app:layout_constraintBottom_toBottomOf="@+id/edtKickPower"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/txtGetData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Get data from Server"
+        android:textColor="@color/design_default_color_error"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bttSave" />
+
+    <Button
+        android:id="@+id/btnGetAllData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#FFC107"
+        android:text="Get all KickBoxers"
+        android:textColor="@color/teal_700"
+        app:backgroundTint="@android:color/holo_orange_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtGetData" />
+
+    <EditText
+        android:id="@+id/edtAllBoxers"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGetAllData" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
