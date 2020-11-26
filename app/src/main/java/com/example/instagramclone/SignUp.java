@@ -39,6 +39,7 @@ public class SignUp extends AppCompatActivity {
         edtAllBoxers.setVisibility(View.INVISIBLE);
         txtGetData = findViewById(R.id.txtGetData);
         btnGetAllData = findViewById(R.id.btnGetAllData);
+
         txtGetData.setOnClickListener(v -> {
             ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery("KickBoxer");
             parseQuery.getInBackground("MN4BPoLAeF", new GetCallback<ParseObject>() {
@@ -105,35 +106,5 @@ public class SignUp extends AppCompatActivity {
         } catch (Exception e) {
             FancyToast.makeText(getApplicationContext(), e.getMessage(), FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
         }
-    }
-    public void helloWorldTapped(View view) {
-/*        ParseObject boxer = new ParseObject("Boxer");
-        boxer.put("punch_name", "HaHa!");
-        boxer.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if(e == null) {
-                    Toast.makeText(getApplicationContext(), "boxer object is saved successfully", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "boxer object is not saved: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });*/
-        ParseObject kickBoxer = new ParseObject("KickBoxer");
-        kickBoxer.put("name", "John");
-        kickBoxer.put("punchSpeed", 1000);
-        kickBoxer.put("punchPower", 2000);
-        kickBoxer.put("kickSpeed",3000);
-        kickBoxer.put("kickPower", 4000);
-        kickBoxer.saveEventually(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if(e == null) {
-                    Toast.makeText(getApplicationContext(), "KickBoxer object is saved successfully", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "KickBoxer object is not saved: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 }
