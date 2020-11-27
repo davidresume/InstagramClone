@@ -2,6 +2,7 @@ package com.example.instagramclone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +24,7 @@ import java.util.List;
 
 public class SignUp extends AppCompatActivity {
     private EditText edtName, edtPunchSpeed, edtPunchPower, edtKickSpeed, edtKickPower, edtAllBoxers;
-    private Button btnGetAllData;
+    private Button btnGetAllData, btnNextActivity;
     private TextView txtGetData;
 
     @Override
@@ -39,6 +40,8 @@ public class SignUp extends AppCompatActivity {
         edtAllBoxers.setVisibility(View.INVISIBLE);
         txtGetData = findViewById(R.id.txtGetData);
         btnGetAllData = findViewById(R.id.btnGetAllData);
+        btnNextActivity = findViewById(R.id.btnNextActivity);
+
 
         txtGetData.setOnClickListener(v -> {
             ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery("KickBoxer");
@@ -58,6 +61,7 @@ public class SignUp extends AppCompatActivity {
 
         btnGetAllData.setOnClickListener(v -> {
             ParseQuery<ParseObject> queryAll = ParseQuery.getQuery("KickBoxer");
+            queryAll.whereGreaterThan("punchPower", 800);
             queryAll.findInBackground(new FindCallback<ParseObject>() {
                 @Override
                 public void done(List<ParseObject> objects, ParseException e) {
@@ -80,6 +84,11 @@ public class SignUp extends AppCompatActivity {
 
                 }
             });
+        });
+
+        btnNextActivity.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(),SignUpLoginActivity.class);
+            startActivity(intent);
         });
     }
 
