@@ -7,14 +7,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProfileTab#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+import com.shashank.sony.fancytoastlib.FancyToast;
+
 public class ProfileTab extends Fragment {
-
+    private EditText edtProfileName, edtProfileBio, edtProfileProfession, edtProfileHobbies, edtProfileFavSport;
+    private Button btnUpdateInfo;
 
 
     public ProfileTab() {
@@ -39,6 +42,55 @@ public class ProfileTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_tab, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile_tab, container, false);
+        edtProfileName = view.findViewById(R.id.edtProfileName);
+        edtProfileBio = view.findViewById(R.id.edtProfileBio);
+        edtProfileProfession = view.findViewById(R.id.edtProfileProfession);
+        edtProfileHobbies = view.findViewById(R.id.edtProfileHobbies);
+        edtProfileFavSport=view.findViewById(R.id.edtProfileFavoriteSports);
+        btnUpdateInfo = view.findViewById(R.id.btnUpdateInfo);
+
+        ParseUser parseUser = ParseUser.getCurrentUser();
+
+        edtProfileName.setText(getProfileField(parseUser,"profileName"));
+        edtProfileBio.setText(getProfileField(parseUser,"profileBio"));
+        edtProfileProfession.setText(getProfileField(parseUser, "profileProfession"));
+        edtProfileHobbies.setText(getProfileField(parseUser, "profileHobbies"));
+        edtProfileFavSport.setText(getProfileField(parseUser, "profileFavSport"));
+
+        btnUpdateInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parseUser.put("profileName", edtProfileName.getText().toString());
+                parseUser.put("profileBio", edtProfileBio.getText().toString());
+                parseUser.put("profileProfession", edtProfileProfession.getText().toString());
+                parseUser.put("profileHobbies", edtProfileHobbies.getText().toString());
+                parseUser.put("profileFavSport", edtProfileFavSport.getText().toString());
+                parseUser.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if(e == null) {
+                            FancyToast.makeText(view.getContext(),
+                                    parseUser.get("username").toString() + "'s profile is save Successfully!",
+                                    FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+                        } else {
+                            FancyToast.makeText(view.getContext(),
+                                    e.getMessage(),
+                                    FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+                        }
+                    }
+                });
+            }
+        });
+
+        return view;
+    }
+
+    private String getProfileField(ParseUser user, String filed) {
+        if(user.get(filed) != null) {
+            return user.get(filed).toString();
+        } else {
+            return "";
+        }
     }
 }
