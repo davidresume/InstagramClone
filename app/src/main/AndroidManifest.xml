@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InstagramClone">
-        <activity android:name=".SociaMediaActivity"></activity>
+        <activity android:name=".SociaMediaActivity"
+            android:theme="@style/Theme.InstagramClone"></activity>
         <activity android:name=".Login" />
         <activity android:name=".SignUp">
             <intent-filter>
