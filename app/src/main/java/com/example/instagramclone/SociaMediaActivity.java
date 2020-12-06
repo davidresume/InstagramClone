@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -39,13 +40,13 @@ public class SociaMediaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_socia_media);
 
-        setTitle("Social Media App!!!");
+        setTitle("Social Media App");
         toolbar = findViewById(R.id.myToolbar);
 
         setSupportActionBar(toolbar);
 
         viewPager = findViewById(R.id.viewPager);
-        tabAdapter = new TabAdapter(getSupportFragmentManager(), 1);
+        tabAdapter = new TabAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(tabAdapter);
 
         tabLayout = findViewById(R.id.tabLayout);
@@ -77,6 +78,10 @@ public class SociaMediaActivity extends AppCompatActivity {
             case R.id.logoutUserItem:
                 ParseUser.getCurrentUser().logOut();
                 finish();
+            case R.id.existItem:
+                ParseUser.getCurrentUser().logOut();
+                finish();
+                System.exit(0);
             default:
         }
         return super.onOptionsItemSelected(item);

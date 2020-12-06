@@ -55,13 +55,18 @@ public class UsersPosts extends AppCompatActivity {
                 if (objects.size() > 0 && e == null) {
                     for (ParseObject post : objects) {
                         TextView postDescription = new TextView(UsersPosts.this);
-                        postDescription.setText(post.get("image_des") + "");
+                        if (post.get("image_des") != null ) {
+                            postDescription.setText(post.get("image_des") + "");
+                        } else {
+                            postDescription.setText( " From " + receivedUserName);
+                        }
                         ParseFile postPicture = (ParseFile) post.get("picture");
                         postPicture.getDataInBackground(new GetDataCallback() {
                             @Override
                             public void done(byte[] data, ParseException e) {
                                 if (data != null && e == null) {
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+
                                     ImageView postImageView = new ImageView(UsersPosts.this);
                                     LinearLayout.LayoutParams imageView_params = new LinearLayout.LayoutParams(
                                             ViewGroup.LayoutParams.MATCH_PARENT,

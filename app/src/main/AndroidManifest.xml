@@ -16,12 +16,11 @@
         <activity android:name=".UsersPosts" />
         <activity
             android:name=".SociaMediaActivity"
-            android:theme="@style/Theme.InstagramClone" />
+            android:theme="@style/Theme.InstagramClone.NoActionBar" />
         <activity android:name=".Login" />
         <activity android:name=".SignUp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -37,16 +37,12 @@ public class UsersTab extends Fragment  implements AdapterView.OnItemClickListen
 
     public static UsersTab newInstance(String param1, String param2) {
         UsersTab fragment = new UsersTab();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override
@@ -109,10 +105,10 @@ public class UsersTab extends Fragment  implements AdapterView.OnItemClickListen
                 if(user != null && e == null) {
                     PrettyDialog prettyDialog = new PrettyDialog(getContext());
                     prettyDialog.setTitle(user.getUsername() + "'s Info")
-                            .setMessage(user.get("profileBio") + "\n" +
-                                    user.get("profileProfession") + "\n" +
-                                    user.get("profileHobbies") + "\n" +
-                                    user.get("profileFavSport"))
+                            .setMessage(getUserProfileValue(user,"profileBio") + "\n" +
+                                    getUserProfileValue(user,"profileProfession") + "\n" +
+                                    getUserProfileValue(user, "profileHobbies") + "\n" +
+                                    getUserProfileValue(user,"profileFavSport"))
                             .setIcon(R.drawable.person)
                             .addButton("OK",                    //button text
                                     R.color.pdlg_color_white,       // button text color
@@ -142,5 +138,12 @@ public class UsersTab extends Fragment  implements AdapterView.OnItemClickListen
 
         });
         return true;
+    }
+    private String getUserProfileValue(ParseUser user, String field) {
+        String userProperty = "";
+        if (user.get(field) != null ) {
+            userProperty = user.get(field).toString();
+        }
+        return userProperty;
     }
 }

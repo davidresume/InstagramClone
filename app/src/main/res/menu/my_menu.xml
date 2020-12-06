@@ -15,4 +15,12 @@
         android:title="Logout"
         android:visible="true"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/existItem"
+        android:icon="@drawable/bnt_quit"
+        android:orderInCategory="200"
+        android:title="Exist"
+        android:visible="true"
+        app:showAsAction="never" />
+
 </menu>
