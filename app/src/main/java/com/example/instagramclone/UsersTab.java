@@ -91,7 +91,7 @@ public class UsersTab extends Fragment  implements AdapterView.OnItemClickListen
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getContext(),UsersPosts.class);
-        intent.putExtra("username", arrayList.get(position));
+        intent.putExtra("username",arrayList.get(position));
         startActivity(intent);
     }
 
